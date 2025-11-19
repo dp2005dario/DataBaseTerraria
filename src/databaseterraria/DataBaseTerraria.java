@@ -14,14 +14,15 @@ import java.sql.ResultSet;
 
 
 public class DataBaseTerraria {
-
+//iniciar sesion es asi de la linea 17 a la 23 sin la 21
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL_CONEXION = "jdbc:mysql://localhost:3306/terraria";
 
     public static void main(String[] args) throws SQLException {
         final String usuario = "root";
         final String password = "1234";
-
+        //Aqui tenemos el iniciar sesion habrá que colocarlo en el main el usuario y el password y el DRIVER y el URL es en el public class
+        
         // Aqui encontramos todas las inserciones de cada tablas de la base de datos
         insertarMundo(usuario, password, 1, "'Blostelandia'", "'Normal'", 5);
         insertarEnemigo(usuario, password, 10, "'zombi'", 100, 20, 1);
@@ -42,7 +43,7 @@ public class DataBaseTerraria {
         actualizarEnemigo(usuario, password, "'zombi'");
         actualizarNPC(usuario, password, "'Lucas'");
         actualizarBioma(usuario, password, "'jungleRuin'");
-        actualizarPersonaje(usuario, password, "'Dario'");
+        actualizarPersonaje(usuario, password, "'Lorenzo'");
         actualizarArma(usuario, password, "'Legendaria'");
         actualizarArmadura(usuario, password, "'Mitico'");
         actualizarEquipable(usuario, password, "'Salto Propulsado'");
@@ -52,60 +53,223 @@ public class DataBaseTerraria {
         actualizarRanger(usuario, password, 1200);
 
         
+        //Aqui tenemos las consultas que vamos a realizar
+                consultas(usuario,password);
+        
+        
         //Econtramos todos los delete que haremos a cada tabla sobre las insercciones que hemos realizado, hacer antes un insert y update
-        eliminarMundo(usuario, password, 1); //error
-        eliminarEnemigo(usuario, password, 10); //error
         eliminarNPC(usuario, password, 2);
         eliminarBioma(usuario, password, 200);
-        eliminarPersonaje(usuario, password, 20); //error
         eliminarArma(usuario, password, 350);
         eliminarArmadura(usuario, password, 8000);
         eliminarEquipable(usuario, password, 56000);
         eliminarInvocador(usuario, password, 20);
-        eliminarMago(usuario, password, "'Elevado'");
+        eliminarMago(usuario, password, "'Moderado'");
         eliminarMelee(usuario, password, "'TerraSword'");
         eliminarRanger(usuario, password, "'Bloste'");
-        eliminarEnemigosHasPersonaje(usuario, password, 10);  
-        
-        
-        //Aqui tenemos las consultas que vamos a realizar
-                consultas(usuario,password);
+        eliminarEnemigosHasPersonaje(usuario, password, 10);
+        eliminarEnemigo(usuario, password, 10); //error
+        eliminarPersonaje(usuario, password, "'Leonardo'"); //error
+        eliminarMundo(usuario, password, 1); //error
     }
     
     
     
     
     
-       private static void consultas(String usuario, String password) {
-    try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
-         Statement statement = conn.createStatement()) {
+      private static void consultas(String usuario, String password) {
+    try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password)) {
 
         Class.forName(DRIVER);
-                System.out.println("Conectado correctamente a la base de datos.");
+        System.out.println("Conectado correctamente a la base de datos.");
 
-        String selectTableSQL = "SELECT nombre,edad FROM PERSONAJE WHERE nombre LIKE 'L%'";
-        ResultSet rs = statement.executeQuery(selectTableSQL); // executeQuery para SELECT
-        boolean hayResultados=false;
-        while (rs.next()) {
-            String nombre = rs.getString("nombre");
-            int edad = rs.getInt("edad"); // si edad es INT en la DB
-            System.out.println("nombre : " + nombre);
-            System.out.println("edad   : " + edad);
-        }
-         if (!hayResultados) {
-            System.out.println("No se encontraron registros que coincidan con 'L%'.");
+        // Primera consulta con LIKE
+                 System.out.println("    ----- LIKE -------  ");
+        String selectTableSQL = "SELECT nombre, edad FROM PERSONAJE WHERE nombre LIKE 'L%'";
+        try (Statement st1 = conn.createStatement();
+             ResultSet rs1 = st1.executeQuery(selectTableSQL)) {
+
+            boolean hay1 = false;
+
+            while (rs1.next()) {
+                hay1 = true;
+                System.out.println("nombre : " + rs1.getString("nombre"));
+                System.out.println("edad   : " + rs1.getInt("edad"));
+            }
+
+            if (!hay1) {
+                System.out.println("No se encontraron registros que coincidan con 'L%'.");
+            }
         }
 
+        // Segunda consulta con LIKE
+                         System.out.println("    ----- LIKE -------  ");
+        selectTableSQL = "SELECT nombre FROM ENEMIGOS WHERE nombre LIKE 'D%'";
+        try (Statement st2 = conn.createStatement();
+             ResultSet rs2 = st2.executeQuery(selectTableSQL)) {
+
+            boolean hay2 = false;
+
+            while (rs2.next()) {
+                hay2 = true;
+                System.out.println("nombre : " + rs2.getString("nombre"));
+            }
+
+            if (!hay2) {
+                System.out.println("No se encontraron registros que coincidan con 'D%'.");
+            }
+        }
+        
+        // Tercera consulta con LIKE
+                         System.out.println("    ----- LIKE -------  ");
+        selectTableSQL = "SELECT id,oficio,nombre FROM NPCS WHERE nombre LIKE 'f%'";
+        try (Statement st3 = conn.createStatement();
+             ResultSet rs3 = st3.executeQuery(selectTableSQL)) {
+
+            boolean hay3 = false;
+
+            while (rs3.next()) {
+                hay3 = true;
+                System.out.println("id   : " + rs3.getInt("id"));
+                System.out.println("nombre : " + rs3.getString("nombre"));
+                System.out.println("oficio : " + rs3.getString("oficio"));
+            }
+
+            if (!hay3) {
+                System.out.println("No se encontraron registros que coincidan con 'f%'.");
+            }
+        }
+
+            // Primera consulta JOIN 
+         System.out.println("    ----- JOIN -------  ");
+         String joinTableSQL = "SELECT p.nombre AS personaje_nombre,p.edad,m.nombre AS mundo_nombre FROM personaje p JOIN mundo m ON(p.Mundo_id=m.id);";
+        try (Statement st4 = conn.createStatement();
+             ResultSet rs4 = st4.executeQuery(joinTableSQL)) {
+
+            boolean hay4 = false;
+
+            while (rs4.next()) {
+                hay4 = true;
+                System.out.println("p.nombre   : " + rs4.getString("personaje_nombre"));
+                System.out.println("p.edad : " + rs4.getInt("edad"));
+                System.out.println("m.nombre : " + rs4.getString("mundo_nombre"));
+            }
+
+            if (!hay4) {
+                System.out.println("Incompatibilidad");
+            }
+        }
+        
+        
+           // Segunda consulta JOIN 
+         System.out.println("    ----- JOIN -------  ");
+         joinTableSQL = "SELECT b.paisaje,m.nombre FROM bioma b JOIN mundo m ON(b.Mundo_id=m.id);";
+        try (Statement st5 = conn.createStatement();
+             ResultSet rs5 = st5.executeQuery(joinTableSQL)) {
+
+            boolean hay5 = false;
+
+            while (rs5.next()) {
+                hay5 = true;
+                System.out.println("b.paisaje   : " + rs5.getString("paisaje"));
+                System.out.println("m.nombre : " + rs5.getString("nombre"));
+            }
+
+            if (!hay5) {
+                System.out.println("Incompatibilidad");
+            }
+        }
+
+              // Tercera consulta JOIN 
+         System.out.println("    ----- JOIN -------  ");
+         joinTableSQL = "SELECT n.oficio,n.nombre AS nombre_npc,m.nombre AS nombre_mundo FROM NPCS n JOIN mundo m ON(n.Mundo_id=m.id);";
+        try (Statement st6 = conn.createStatement();
+             ResultSet rs6 = st6.executeQuery(joinTableSQL)) {
+
+            boolean hay6 = false;
+
+            while (rs6.next()) {
+                hay6 = true;
+                System.out.println("n.oficio   : " + rs6.getString("oficio"));
+                System.out.println("n.nombre : " + rs6.getString("nombre_npc"));
+                System.out.println("m.nombre : " + rs6.getString("nombre_mundo"));
+            }
+
+            if (!hay6) {
+                System.out.println("Incompatibilidad");
+            }
+        }
+        
+        
+                // Segunda consulta Group By 
+         System.out.println("    ----- group By -------  ");
+         System.out.println(" agrupa por dificultad el total de personajes ");
+         selectTableSQL = "SELECT dificultad, COUNT(*) AS total_personajes FROM personaje GROUP BY dificultad;";
+        try (Statement st7 = conn.createStatement();
+             ResultSet rs7 = st7.executeQuery(selectTableSQL)) {
+
+            boolean hay7 = false;
+            while (rs7.next()) {
+                hay7 = true;
+                System.out.println("dificultad   : " + rs7.getString("total_personajes"));
+            }
+
+            if (!hay7) {
+                System.out.println("Incompatibilidad");
+            }
+        }
+        
+        
+                // Segunda consulta Group By 
+         System.out.println("    ----- group By -------  ");
+         System.out.println("es el promedio de vida de los enemigos");
+         selectTableSQL = "SELECT id, AVG(vida) AS promedio_vida FROM enemigos GROUP BY id;";
+        try (Statement st8 = conn.createStatement();
+             ResultSet rs8 = st8.executeQuery(selectTableSQL)) {
+
+            boolean hay8 = false;
+            while (rs8.next()) {
+                hay8 = true;
+                System.out.println("ENEMIGOS_id   : " + rs8.getString("id"));
+                System.out.println("vida_promedio   : " + rs8.getString("promedio_vida"));
+            }
+
+            if (!hay8) {
+                System.out.println("Incompatibilidad");
+            }
+        }
+        
+        
+        
+                // Tercera consulta Group By 
+         System.out.println("    ----- group By -------  ");
+         System.out.println("suma la edades de todos los personajes por dificultad");
+         selectTableSQL = "SELECT dificultad, SUM(edad) AS total_edad FROM personaje GROUP BY dificultad;";
+        try (Statement st9 = conn.createStatement();
+             ResultSet rs9 = st9.executeQuery(selectTableSQL)) {
+
+            boolean hay9 = false;
+            while (rs9.next()) {
+                hay9 = true;
+                System.out.println("dificultad  : " + rs9.getString("dificultad"));
+                System.out.println("edad_total   : " + rs9.getString("total_edad"));
+            }
+            
+            if (!hay9) {
+                System.out.println("Incompatibilidad");
+            }
+        }
+     //Aqui tenemos en caso de error lo que saltaria
     } catch (SQLException | ClassNotFoundException e) {
         System.out.println(e.getMessage());
     }
-}
+
     
     
     
     
     
-    
+      }
     
     
     
@@ -142,7 +306,7 @@ public class DataBaseTerraria {
              Statement statement = conn.createStatement()) {
 
             Class.forName(DRIVER);
-            String deleteSQL = "DELETE FROM MUNDO WHERE id=1" + id;
+            String deleteSQL = "DELETE FROM MUNDO WHERE id = " + id;
             int res = statement.executeUpdate(deleteSQL);
             System.out.println("Numero de registros afectados en delete mundo: " + res);
 
@@ -167,7 +331,7 @@ public class DataBaseTerraria {
              Statement statement = conn.createStatement()) {
 
             Class.forName(DRIVER);
-            String updateSQL = "UPDATE ENEMIGOS SET nombre = 'Demogorgon' WHERE nombre = " + nombre;
+            String updateSQL = "UPDATE ENEMIGOS SET nombre ='Demogorgon' WHERE nombre = " + nombre;
             int res = statement.executeUpdate(updateSQL);
             System.out.println("Numero de registros afectados en update enemigos: " + res);
 
@@ -179,7 +343,7 @@ public class DataBaseTerraria {
              Statement statement = conn.createStatement()) {
 
             Class.forName(DRIVER);
-            String deleteSQL = "DELETE FROM ENEMIGOS WHERE id =10" + id;
+            String deleteSQL = "DELETE FROM ENEMIGOS WHERE id = " + id;
             int res = statement.executeUpdate(deleteSQL);
             System.out.println("Numero de registros afectados en delete enemigos: " + res);
 
@@ -279,19 +443,19 @@ public class DataBaseTerraria {
              Statement statement = conn.createStatement()) {
 
             Class.forName(DRIVER);
-            String updateSQL = "UPDATE PERSONAJE SET nombre = 'dp2005dario' WHERE nombre = " + nombre;
+            String updateSQL = "UPDATE PERSONAJE SET nombre ='Leonardo' WHERE nombre = " + nombre;
             int res = statement.executeUpdate(updateSQL);
             System.out.println("Numero de registros afectados en update personaje: " + res);
 
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    private static void eliminarPersonaje(String usuario, String password, int id) {
+    private static void eliminarPersonaje(String usuario, String password, String nombre) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
 
             Class.forName(DRIVER);
-            String deleteSQL = "DELETE FROM PERSONAJE WHERE id=20" + id;
+            String deleteSQL = "DELETE FROM PERSONAJE WHERE nombre = " + nombre;
             int res = statement.executeUpdate(deleteSQL);
             System.out.println("Numero de registros afectados en delete personaje: " + res);
 
@@ -464,7 +628,7 @@ public class DataBaseTerraria {
              Statement statement = conn.createStatement()) {
 
             Class.forName(DRIVER);
-            String updateSQL = "UPDATE MAGO SET usomana = 'Moderado' WHERE usomana = " + daño;
+            String updateSQL = "UPDATE MAGO SET usomana ='Moderado' WHERE usomana = " + daño;
             int res = statement.executeUpdate(updateSQL);
             System.out.println("Numero de registros afectados en update mago: " + res);
 
