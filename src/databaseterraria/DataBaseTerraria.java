@@ -1,9 +1,9 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package databaseterraria;
-
 import com.mysql.cj.protocol.Resultset;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,12 +17,17 @@ public class DataBaseTerraria {
 //iniciar sesion es asi de la linea 17 a la 23 sin la 21
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL_CONEXION = "jdbc:mysql://localhost:3306/terraria";
+//Lo usaremos para que al darle al boton de conexion o desconectar nos funciones
+    private Connection sesionactual;
+
 
     public static void main(String[] args) throws SQLException {
         final String usuario = "root";
         final String password = "1234";
-        //Aqui tenemos el iniciar sesion habrá que colocarlo en el main el usuario y el password y el DRIVER y el URL es en el public class
         
+        
+        //Aqui tenemos el iniciar sesion habrá que colocarlo en el main el usuario y el password 
+        Connection sesionActual = iniciarSesion(usuario, password);
         // Aqui encontramos todas las inserciones de cada tablas de la base de datos
         insertarMundo(usuario, password, 1, "'Blostelandia'", "'Normal'", 5);
         insertarEnemigo(usuario, password, 10, "'zombi'", 100, 20, 1);
@@ -47,7 +52,7 @@ public class DataBaseTerraria {
         actualizarArma(usuario, password, "'Legendaria'");
         actualizarArmadura(usuario, password, "'Mitico'");
         actualizarEquipable(usuario, password, "'Salto Propulsado'");
-        actualizarInvocador(usuario, password, 20); //DAR ERROR ARREGLAR
+        actualizarInvocador(usuario, password, 20); 
         actualizarMago(usuario, password, "'Elevado'");
         actualizarMelee(usuario, password, 300);
         actualizarRanger(usuario, password, 1200);
@@ -68,12 +73,27 @@ public class DataBaseTerraria {
         eliminarMelee(usuario, password, "'TerraSword'");
         eliminarRanger(usuario, password, "'Bloste'");
         eliminarEnemigosHasPersonaje(usuario, password, 10);
-        eliminarEnemigo(usuario, password, 10); //error
-        eliminarPersonaje(usuario, password, "'Leonardo'"); //error
-        eliminarMundo(usuario, password, 1); //error
+        eliminarEnemigo(usuario, password, 10); 
+        eliminarPersonaje(usuario, password, "'Leonardo'"); 
+        eliminarMundo(usuario, password, 1); 
+        
+        //Y para finalizar, con este metodo cuando la conexion sea null o queramos cerrar sesion nos saldrá
+        cerrarSesion(sesionActual);
+        sesionActual=null;
     }
     
-    
+       //Esta funcion recoje los parámetros para iniciar sesion , que son el usuario la contrasena y el nombre del DRIVER y ya con esto se conecta de Java a SQL  
+    public static Connection iniciarSesion(String usuario, String password) {
+    try {
+        Class.forName(DRIVER);
+        Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
+        System.out.println("Conexion a BBD correcta");
+        return conn;  // devolvemos la conexión ya abierta
+    } catch (SQLException | ClassNotFoundException e) {
+        System.out.println("Error con la conexion a BBD: " + e.getMessage());
+        return null;
+    }
+}
     
     
     
@@ -270,12 +290,6 @@ public class DataBaseTerraria {
     
     
       }
-    
-    
-    
-    
-    
-
     // ------------------- MUNDO -------------------
     private static void insertarMundo(String usuario, String password, int id, String nombre, String dificultad, int nivelcorrupcion) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
@@ -745,6 +759,17 @@ public class DataBaseTerraria {
 
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
+    
+    public static void cerrarSesion(Connection conn) {
+        if (conn != null) {
+            try {
+                conn.close();
+                System.out.println("Sesión cerrada correctamente.");
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar sesión: " + e.getMessage());
+            }
+        }
+    }
 
-}
+    }
 
