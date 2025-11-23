@@ -85,7 +85,7 @@ public class DataBaseTerraria {
         sesionActual=null;
     }
     
-    /*
+    /**
      * Funcion para iniciar sesion, al recibir los parametros de usuario y contraseña los compara a los de la Base de Datos
      * En caso de fallar, devuelve un mensaje de error, si los datos son correctos se realiza la conexion
     */
@@ -102,7 +102,7 @@ public class DataBaseTerraria {
 }
     
     
-    /*
+    /**
      * Metodo que va realizando consultas predeterminadas que usan LIKE, JOIN y GROUP BY, tiene un catchException en caso de haber error
     */
       private static void consultas(String usuario, String password) {
@@ -299,7 +299,7 @@ public class DataBaseTerraria {
     
       }
     // ------------------- MUNDO -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Mundo los datos que recibe (usuario, contraseña, id, nombre, dificultad y nivelcorrupcion
     */
     private static void insertarMundo(String usuario, String password, int id, String nombre, String dificultad, int nivelcorrupcion) {
@@ -313,7 +313,7 @@ public class DataBaseTerraria {
 
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Mundo el nombre de las lineas afectadas a BlosteWorld
     */
     private static void actualizarMundo(String usuario, String password, String nombre) {
@@ -328,7 +328,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Mundo las filas afectadas
     */
     private static void eliminarMundo(String usuario, String password, int id) {
@@ -344,7 +344,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- ENEMIGOS -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Enemigo los datos que recibe (usuario, contraseña, id, nombre, vida,  damage y mundoId
     */
     private static void insertarEnemigo(String usuario, String password, int id, String nombre, int vida, int damage, int mundoId) {
@@ -359,7 +359,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Enemigo las tablas afectadas a Demogorgon
     */
     private static void actualizarEnemigo(String usuario, String password, String nombre) {
@@ -374,7 +374,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Enemigo las filas afectadas
     */
     private static void eliminarEnemigo(String usuario, String password, int id) {
@@ -390,7 +390,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- NPCS -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla NPC los datos que recibe (usuario, contraseña, id, oficio, nombre,  felicidad y mundoId
     */
     private static void insertarNPC(String usuario, String password, int id, String oficio, String nombre, String felicidad, int mundoId) {
@@ -405,7 +405,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla NPC los nombres afectados a francisco
     */
     private static void actualizarNPC(String usuario, String password, String nombre) {
@@ -420,7 +420,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      + Comprueba la conexion con la base de datos, si funciona, elimina en la tabla NPC las filas afectadas
     */
     private static void eliminarNPC(String usuario, String password, int id) {
@@ -436,7 +436,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- BIOMA -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Bioma los datos que recibe (usuario, contraseña, paisaje, nombre, profundidad,  peligrosidad y mundoId
     */
     private static void insertarBioma(String usuario, String password, String paisaje, String nombre, int profundidad, String peligrosidad, int mundoId) {
@@ -451,7 +451,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Bioma los nombres afectados a JungleCastle
     */
     private static void actualizarBioma(String usuario, String password, String nombre) {
@@ -466,7 +466,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Bioma las filas afectadas
     */
     private static void eliminarBioma(String usuario, String password, int profundidad) {
@@ -482,7 +482,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- PERSONAJE -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Personaje los datos que recibe (usuario, contraseña, id, nombre, dificultad,  edad, fechaCreacion, dineroInicial, vida y mundoId
     */
     private static void insertarPersonaje(String usuario, String password, int id, String nombre, String dificultad, int edad, LocalDate fechaCreacion, int dineroInicial, int vida, int mundoId) {
@@ -498,7 +498,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Personaje los nombres afectados a leonardo
     */
     private static void actualizarPersonaje(String usuario, String password, String nombre) {
@@ -513,7 +513,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Personaje las filas afectadas
     */
     private static void eliminarPersonaje(String usuario, String password, String nombre) {
@@ -529,7 +529,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- ARMAS -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Arma los datos que recibe (usuario, contraseña, etiqueta, nombre, damage, tiempoUso, precio, calidad y personajeId
     */
     private static void insertarArma(String usuario, String password, int etiqueta, String nombre, int damage, int tiempoUso, int precio, String calidad, int personajeId) {
@@ -544,7 +544,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Arma las calidades afectadas a raro
     */
     private static void actualizarArma(String usuario, String password, String calidad) {
@@ -559,7 +559,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Arma las filas afectadas
     */
     private static void eliminarArma(String usuario, String password, int precio) {
@@ -575,7 +575,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- ARMADURAS -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Armadura los datos que recibe (usuario, contraseña, etiqueta, defensa, precio, calidad, bonus y personajeId
     */
     private static void insertarArmadura(String usuario, String password, int etiqueta, int defensa, int precio, String calidad, String bonus, int personajeId) {
@@ -590,7 +590,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Armadura las calidades afectadas a raro
     */
     private static void actualizarArmadura(String usuario, String password, String calidad) {
@@ -605,7 +605,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Armadura las filas afectadas
     */
     private static void eliminarArmadura(String usuario, String password, int etiqueta) {
@@ -621,7 +621,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- EQUIPABLES -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Equipable los datos que recibe (usuario, contraseña, etiqueta, beneficio1, beneficio2 y personajeId
     */
     private static void insertarEquipable(String usuario, String password, int etiqueta, String beneficio1, String beneficio2, int personajeId) {
@@ -636,7 +636,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Equipable los beneficio1 afectados a Propulsado
     */
     private static void actualizarEquipable(String usuario, String password, String beneficio1) {
@@ -651,7 +651,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Equipable las filas afectadas
     */
     private static void eliminarEquipable(String usuario, String password, int etiqueta) {
@@ -667,7 +667,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- INVOCADOR -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Invocador los datos que recibe (usuario, contraseña, armapreferida, personajeId y numeroinvocaciones
     */
     private static void insertarInvocador(String usuario, String password, String armapreferida, int personajeId, int numeroinvocaciones) {
@@ -682,7 +682,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Invocador los numeroinvocaciones afectados a 300
     */
     private static void actualizarInvocador(String usuario, String password, int numeroinvocaciones) {
@@ -697,7 +697,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Invocador las filas afectadas
     */
     private static void eliminarInvocador(String usuario, String password, int personajeId) {
@@ -713,7 +713,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- MAGO -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Invocador los datos que recibe (usuario, contraseña, armapreferida, personajeId y daño
     */
     private static void insertarMago(String usuario, String password, String armapreferida, String daño, int personajeId) {
@@ -728,7 +728,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Mago los usomana afectados a moderado
     */
     private static void actualizarMago(String usuario, String password, String daño) {
@@ -743,7 +743,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina  en la tabla Mago las filas afectadas
     */
     private static void eliminarMago(String usuario, String password, String daño) {
@@ -759,7 +759,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- MELEE -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Melee los datos que recibe (usuario, contraseña, armapreferida, personajeId y damage
     */
     private static void insertarMelee(String usuario, String password, String armapreferida, int damage, int personajeId) {
@@ -774,7 +774,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Melee los damage afectados a 150
     */
     private static void actualizarMelee(String usuario, String password, int damage) {
@@ -789,7 +789,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Melee las filas afectadas
     */
     private static void eliminarMelee(String usuario, String password, String armapreferida) {
@@ -805,7 +805,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- RANGER -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Ranger los datos que recibe (usuario, contraseña, armapreferida, personajeId y alcance
     */
     private static void insertarRanger(String usuario, String password, String armapreferida, int alcance, int personajeId) {
@@ -820,7 +820,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Ranger los alcance afectadosa 1400
     */
     private static void actualizarRanger(String usuario, String password, int damage) {
@@ -835,7 +835,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Ranger las filas afectadas
     */
     private static void eliminarRanger(String usuario, String password, String armapreferida) {
@@ -851,7 +851,7 @@ public class DataBaseTerraria {
     }
 
     // ------------------- ENEMIGOS_HAS_PERSONAJE -------------------
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla EnemigosHasPersonaje los datos que recibe (usuario, contraseña, enemigosId y personajeId
     */
     private static void insertarEnemigosHasPersonaje(String usuario, String password, int enemigosId, int personajeId) {
@@ -866,7 +866,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
-    /*
+    /**
      * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla EnemigosHasPersonaje las filas afectadas
     */
     private static void eliminarEnemigosHasPersonaje(String usuario, String password, int enemigosId) {
@@ -881,7 +881,7 @@ public class DataBaseTerraria {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
     
-    /*
+    /**
      * Metodo para cerrar sesion en la base de datos, usa SQLException si no se puede hacer
     */
     public static void cerrarSesion(Connection conn) {

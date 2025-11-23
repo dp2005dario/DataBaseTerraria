@@ -15,7 +15,8 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * La clase que abarca la propia base de datos
+ * Realiza la conexión, inserta actualiza y borra registros predeterminados
  * @author MEDAC
  */
 public class VentanaMenu extends javax.swing.JFrame {
@@ -172,6 +173,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que ocurre al darle al boton BtnConexion, el cual conecta a la base de datos y cambia el estado de otros botones para usarlos
+    */
     private void BtnConexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConexionActionPerformed
                primerBotonPresionado=true;
                 sesionActual = iniciarSesion(usuario, password);
@@ -189,6 +193,9 @@ public class VentanaMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnConexionActionPerformed
 
+    /**
+     * Método que ocurre al darle al boton BtnInsertar, el cual inserta unos datos predeterminados a la base de datos y cambia el estado de otros botones para usarlos 
+     */
     private void BtnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInsertarActionPerformed
         insertarMundo(usuario, password, 1, "'Blostelandia'", "'Normal'", 5);
         insertarEnemigo(usuario, password, 10, "'zombi'", 100, 20, 1);
@@ -208,6 +215,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     BtnInsertar.setEnabled(false);
     }//GEN-LAST:event_BtnInsertarActionPerformed
 
+    /**
+     * Método que ocurre al darle al boton BtnUpdate, el cual actualiza algunos datos predeterminados a otros distintos en la base de datos y cambia el estado de otros botones para usarlos
+    */
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
         if (!insertHecho) {
         JOptionPane.showMessageDialog(this, "Primero tienes que darle al botón de Insertar.");
@@ -230,6 +240,9 @@ public class VentanaMenu extends javax.swing.JFrame {
                        BtnUpdate.setEnabled(false);
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
+    /**
+     * Método que ocurre al darle al boton BtnConsultas, el cual escribe por consola unas consultas predeterminadas, no puede usarse mas de una vez seguida
+    */
     private void BtnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultasActionPerformed
         if (!insertHecho||!updateHecho) {
         JOptionPane.showMessageDialog(this, "Primero tienes que darle al botón de Insertar y Update");
@@ -240,6 +253,9 @@ public class VentanaMenu extends javax.swing.JFrame {
            BtnConsultas.setEnabled(false);
     }//GEN-LAST:event_BtnConsultasActionPerformed
 
+    /**
+     * Método que ocurre al darle al boton BtnDelete, el cual borra ciertas filas y datos en la base de datos y cambia el estado de otros botones para usarlos
+    */
     private void BtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteActionPerformed
         if (!insertHecho||!updateHecho) {
         JOptionPane.showMessageDialog(this, "Primero tienes que insertar valores y actualizarlos");
@@ -262,6 +278,9 @@ public class VentanaMenu extends javax.swing.JFrame {
                 BtnDelete.setEnabled(false);
     }//GEN-LAST:event_BtnDeleteActionPerformed
 
+    /**
+     * Método que ocurre al darle al boton BtnDesconexion, el cual desconecta a la base de datos y cambia el estado de otros botones para usarlos
+    */
     private void BtnDesconexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDesconexionActionPerformed
           cerrarSesion(sesionActual);
           BtnConsultas.setEnabled(false);
@@ -297,7 +316,12 @@ public class VentanaMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new VentanaMenu().setVisible(true));
     }
-      //Esta funcion recoje los parámetros para iniciar sesion , que son el usuario la contrasena y el nombre del DRIVER y ya con esto se conecta de Java a SQL  
+    /**
+     * Esta funcion recoje los parámetros para iniciar sesion , que son el usuario la contrasena y el nombre del DRIVER y ya con esto se conecta de Java a SQL  
+     * @param usuario
+     * @param password
+     * @return 
+    */
     public static Connection iniciarSesion(String usuario, String password) {
     try {
         Class.forName(DRIVER);
@@ -311,8 +335,10 @@ public class VentanaMenu extends javax.swing.JFrame {
 }
     
     
-    //TODOS LOS METODOS DE SUS RESPECTIVOS LLAMAMIENTOS
-      private static void consultas(String usuario, String password) {
+    /**
+     * Método que realiza las consultas y las escribe por la consola
+    */
+    private static void consultas(String usuario, String password) {
     try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password)) {
 
         Class.forName(DRIVER);
@@ -506,6 +532,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     
       }
     // ------------------- MUNDO -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Mundo los datos que recibe (usuario, contraseña, id, nombre, dificultad y nivelcorrupcion
+    */
     private static void insertarMundo(String usuario, String password, int id, String nombre, String dificultad, int nivelcorrupcion) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -518,6 +547,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Mundo el nombre de las lineas afectadas a BlosteWorld
+    */
     private static void actualizarMundo(String usuario, String password, String nombre) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -530,6 +562,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Mundo las filas afectadas
+    */
     private static void eliminarMundo(String usuario, String password, int id) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -543,6 +578,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- ENEMIGOS -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Enemigo los datos que recibe (usuario, contraseña, id, nombre, vida,  damage y mundoId
+    */
     private static void insertarEnemigo(String usuario, String password, int id, String nombre, int vida, int damage, int mundoId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -555,6 +593,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Enemigo las tablas afectadas a Demogorgon
+    */
     private static void actualizarEnemigo(String usuario, String password, String nombre) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -567,6 +608,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Enemigo las filas afectadas
+    */
     private static void eliminarEnemigo(String usuario, String password, int id) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -580,6 +624,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- NPCS -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla NPC los datos que recibe (usuario, contraseña, id, oficio, nombre,  felicidad y mundoId
+    */
     private static void insertarNPC(String usuario, String password, int id, String oficio, String nombre, String felicidad, int mundoId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -592,6 +639,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla NPC los nombres afectados a francisco
+    */
     private static void actualizarNPC(String usuario, String password, String nombre) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -604,6 +654,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     + Comprueba la conexion con la base de datos, si funciona, elimina en la tabla NPC las filas afectadas
+    */
     private static void eliminarNPC(String usuario, String password, int id) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -617,6 +670,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- BIOMA -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Bioma los datos que recibe (usuario, contraseña, paisaje, nombre, profundidad,  peligrosidad y mundoId
+    */
     private static void insertarBioma(String usuario, String password, String paisaje, String nombre, int profundidad, String peligrosidad, int mundoId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -629,6 +685,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Bioma los nombres afectados a JungleCastle
+    */
     private static void actualizarBioma(String usuario, String password, String nombre) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -641,6 +700,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Bioma las filas afectadas
+    */
     private static void eliminarBioma(String usuario, String password, int profundidad) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -654,6 +716,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- PERSONAJE -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Personaje los datos que recibe (usuario, contraseña, id, nombre, dificultad,  edad, fechaCreacion, dineroInicial, vida y mundoId
+    */
     private static void insertarPersonaje(String usuario, String password, int id, String nombre, String dificultad, int edad, LocalDate fechaCreacion, int dineroInicial, int vida, int mundoId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -667,6 +732,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Personaje los nombres afectados a leonardo
+    */
     private static void actualizarPersonaje(String usuario, String password, String nombre) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -679,6 +747,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Personaje las filas afectadas
+    */
     private static void eliminarPersonaje(String usuario, String password, String nombre) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -692,6 +763,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- ARMAS -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Arma los datos que recibe (usuario, contraseña, etiqueta, nombre, damage, tiempoUso, precio, calidad y personajeId
+    */
     private static void insertarArma(String usuario, String password, int etiqueta, String nombre, int damage, int tiempoUso, int precio, String calidad, int personajeId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -704,6 +778,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Arma las calidades afectadas a raro
+    */
     private static void actualizarArma(String usuario, String password, String calidad) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -716,6 +793,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Arma las filas afectadas
+    */
     private static void eliminarArma(String usuario, String password, int precio) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -729,6 +809,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- ARMADURAS -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Armadura los datos que recibe (usuario, contraseña, etiqueta, defensa, precio, calidad, bonus y personajeId
+    */
     private static void insertarArmadura(String usuario, String password, int etiqueta, int defensa, int precio, String calidad, String bonus, int personajeId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -741,6 +824,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Armadura las calidades afectadas a raro
+    */
     private static void actualizarArmadura(String usuario, String password, String calidad) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -753,6 +839,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Armadura las filas afectadas
+    */
     private static void eliminarArmadura(String usuario, String password, int etiqueta) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -766,6 +855,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- EQUIPABLES -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Equipable los datos que recibe (usuario, contraseña, etiqueta, beneficio1, beneficio2 y personajeId
+    */
     private static void insertarEquipable(String usuario, String password, int etiqueta, String beneficio1, String beneficio2, int personajeId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -778,6 +870,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Equipable los beneficio1 afectados a Propulsado
+    */
     private static void actualizarEquipable(String usuario, String password, String beneficio1) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -790,6 +885,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Equipable las filas afectadas
+    */
     private static void eliminarEquipable(String usuario, String password, int etiqueta) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -803,6 +901,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- INVOCADOR -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Invocador los datos que recibe (usuario, contraseña, armapreferida, personajeId y numeroinvocaciones
+    */
     private static void insertarInvocador(String usuario, String password, String armapreferida, int personajeId, int numeroinvocaciones) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -815,6 +916,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Invocador los numeroinvocaciones afectados a 300
+    */
     private static void actualizarInvocador(String usuario, String password, int numeroinvocaciones) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -826,7 +930,10 @@ public class VentanaMenu extends javax.swing.JFrame {
 
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
-
+    
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Invocador las filas afectadas
+    */
     private static void eliminarInvocador(String usuario, String password, int personajeId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -840,6 +947,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- MAGO -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Invocador los datos que recibe (usuario, contraseña, armapreferida, personajeId y daño
+    */
     private static void insertarMago(String usuario, String password, String armapreferida, String daño, int personajeId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -852,6 +962,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Mago los usomana afectados a moderado
+    */
     private static void actualizarMago(String usuario, String password, String daño) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -864,6 +977,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina  en la tabla Mago las filas afectadas
+    */
     private static void eliminarMago(String usuario, String password, String daño) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -877,6 +993,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- MELEE -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Melee los datos que recibe (usuario, contraseña, armapreferida, personajeId y damage
+    */
     private static void insertarMelee(String usuario, String password, String armapreferida, int damage, int personajeId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -889,6 +1008,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Melee los damage afectados a 150
+    */
     private static void actualizarMelee(String usuario, String password, int damage) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -901,6 +1023,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Melee las filas afectadas
+    */
     private static void eliminarMelee(String usuario, String password, String armapreferida) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -914,6 +1039,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- RANGER -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla Ranger los datos que recibe (usuario, contraseña, armapreferida, personajeId y alcance
+    */
     private static void insertarRanger(String usuario, String password, String armapreferida, int alcance, int personajeId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -926,6 +1054,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, actualiza en la tabla Ranger los alcance afectadosa 1400
+    */
     private static void actualizarRanger(String usuario, String password, int damage) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -938,6 +1069,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla Ranger las filas afectadas
+    */
     private static void eliminarRanger(String usuario, String password, String armapreferida) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -951,6 +1085,9 @@ public class VentanaMenu extends javax.swing.JFrame {
     }
 
     // ------------------- ENEMIGOS_HAS_PERSONAJE -------------------
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, inserta en la tabla EnemigosHasPersonaje los datos que recibe (usuario, contraseña, enemigosId y personajeId
+    */
     private static void insertarEnemigosHasPersonaje(String usuario, String password, int enemigosId, int personajeId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -963,6 +1100,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
 
+    /**
+     * Comprueba la conexion con la base de datos, si funciona, elimina en la tabla EnemigosHasPersonaje las filas afectadas
+    */
     private static void eliminarEnemigosHasPersonaje(String usuario, String password, int enemigosId) {
         try (Connection conn = DriverManager.getConnection(URL_CONEXION, usuario, password);
              Statement statement = conn.createStatement()) {
@@ -975,6 +1115,9 @@ public class VentanaMenu extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException e) { System.out.println(e.getMessage()); }
     }
     
+    /**
+     * Metodo para cerrar sesion en la base de datos, usa SQLException si no se puede hacer
+    */
     public static void cerrarSesion(Connection conn) {
         if (conn != null) {
             try {

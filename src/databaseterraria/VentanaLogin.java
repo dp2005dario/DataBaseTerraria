@@ -164,18 +164,18 @@ public class VentanaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /*
+    /**
      * Método que se lanza cuando se pulsa el boton para iniciar sesion, comprueba que ambos campos sean correctos para pasar a la ventana meú
     */
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        if(fldUsuario.getText().equals("root1234")&&psfContrasena.getText().equals("1234")){
+        if(fldUsuario.getText().equals("root")&&psfContrasena.getText().equals("1234")){
            VentanaMenu home = new VentanaMenu();
            home.setVisible(true);
        }
        else if (fldUsuario.getText().equals("")&&psfContrasena.getText().equals("")){
            JOptionPane.showMessageDialog(this, "No has introducido las credenciales, introducelas", "Ausencia de datos",JOptionPane.WARNING_MESSAGE);
        }
-       else if (!fldUsuario.getText().equals("root1234")||!psfContrasena.getText().equals("1234")){
+       else if (!fldUsuario.getText().equals("root")||!psfContrasena.getText().equals("1234")){
            JOptionPane.showMessageDialog(this, "O la contraseña o el correo son equivocados, vuelve a intentarlo","Error de login",JOptionPane.ERROR_MESSAGE);
            fldUsuario.setText("");
            psfContrasena.setText("");
