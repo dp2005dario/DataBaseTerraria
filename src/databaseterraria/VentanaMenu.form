@@ -51,7 +51,7 @@
         <Container class="javax.swing.JPanel" name="PnlEncabezado">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="99" red="33" type="rgb"/>
+              <Color blue="ff" green="e5" red="ef" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -88,7 +88,7 @@
         <Container class="javax.swing.JPanel" name="PnlPie">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="66" red="66" type="rgb"/>
+              <Color blue="ff" green="e5" red="ef" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -133,7 +133,12 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/conectar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Conexi&#xf3;n a Terraria"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="1"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnConexionActionPerformed"/>
@@ -141,7 +146,12 @@
             </Component>
             <Component class="javax.swing.JButton" name="BtnInsertar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/insertar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Insertar Tablas"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="1"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnInsertarActionPerformed"/>
@@ -149,7 +159,12 @@
             </Component>
             <Component class="javax.swing.JButton" name="BtnUpdate">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/actualizar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Update Tablas"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="1"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnUpdateActionPerformed"/>
@@ -157,7 +172,12 @@
             </Component>
             <Component class="javax.swing.JButton" name="BtnConsultas">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/ejecutar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Consultas LIKE,JOIN,GROUP.."/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="1"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnConsultasActionPerformed"/>
@@ -165,7 +185,12 @@
             </Component>
             <Component class="javax.swing.JButton" name="BtnDelete">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/eliminar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Tablas"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="1"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnDeleteActionPerformed"/>
@@ -173,7 +198,12 @@
             </Component>
             <Component class="javax.swing.JButton" name="BtnDesconexion">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/desconectar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Desconectar de Terraria"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="1"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnDesconexionActionPerformed"/>

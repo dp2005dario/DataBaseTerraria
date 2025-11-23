@@ -75,7 +75,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         PnlMenu.setPreferredSize(new java.awt.Dimension(1000, 600));
         PnlMenu.setLayout(new java.awt.BorderLayout());
 
-        PnlEncabezado.setBackground(new java.awt.Color(51, 153, 0));
+        PnlEncabezado.setBackground(new java.awt.Color(239, 229, 255));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Verdana", 3, 24)); // NOI18N
@@ -88,7 +88,7 @@ public class VentanaMenu extends javax.swing.JFrame {
 
         PnlMenu.add(PnlEncabezado, java.awt.BorderLayout.PAGE_START);
 
-        PnlPie.setBackground(new java.awt.Color(102, 102, 0));
+        PnlPie.setBackground(new java.awt.Color(239, 229, 255));
 
         javax.swing.GroupLayout PnlPieLayout = new javax.swing.GroupLayout(PnlPie);
         PnlPie.setLayout(PnlPieLayout);
@@ -107,7 +107,10 @@ public class VentanaMenu extends javax.swing.JFrame {
         PnlBotones.setLayout(new java.awt.GridLayout(3, 1, 2, 0));
 
         BtnConexion.setBackground(new java.awt.Color(153, 153, 153));
+        BtnConexion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/conectar.png"))); // NOI18N
         BtnConexion.setText("Conexión a Terraria");
+        BtnConexion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnConexion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         BtnConexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnConexionActionPerformed(evt);
@@ -115,7 +118,10 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
         PnlBotones.add(BtnConexion);
 
+        BtnInsertar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/insertar.png"))); // NOI18N
         BtnInsertar.setText("Insertar Tablas");
+        BtnInsertar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnInsertar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         BtnInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnInsertarActionPerformed(evt);
@@ -123,7 +129,10 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
         PnlBotones.add(BtnInsertar);
 
+        BtnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/actualizar.png"))); // NOI18N
         BtnUpdate.setText("Update Tablas");
+        BtnUpdate.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnUpdate.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         BtnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnUpdateActionPerformed(evt);
@@ -131,7 +140,10 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
         PnlBotones.add(BtnUpdate);
 
+        BtnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ejecutar.png"))); // NOI18N
         BtnConsultas.setText("Consultas LIKE,JOIN,GROUP..");
+        BtnConsultas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnConsultas.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         BtnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnConsultasActionPerformed(evt);
@@ -139,7 +151,10 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
         PnlBotones.add(BtnConsultas);
 
+        BtnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eliminar.png"))); // NOI18N
         BtnDelete.setText("Eliminar Tablas");
+        BtnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnDelete.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         BtnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnDeleteActionPerformed(evt);
@@ -147,7 +162,10 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
         PnlBotones.add(BtnDelete);
 
+        BtnDesconexion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/desconectar.png"))); // NOI18N
         BtnDesconexion.setText("Desconectar de Terraria");
+        BtnDesconexion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnDesconexion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         BtnDesconexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnDesconexionActionPerformed(evt);
