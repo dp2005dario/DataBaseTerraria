@@ -4,8 +4,10 @@
  */
 package databaseterraria;
 
+import javax.swing.JOptionPane;
+
 /**
- *
+ * Declaracion de la clase
  * @author MEDAC
  */
 public class VentanaLogin extends javax.swing.JFrame {
@@ -126,6 +128,11 @@ public class VentanaLogin extends javax.swing.JFrame {
         btnIniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnIniciarSesion.setText("Iniciar sesión");
         btnIniciarSesion.setPreferredSize(new java.awt.Dimension(140, 50));
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -151,13 +158,32 @@ public class VentanaLogin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+     * Método que se lanza cuando se pulsa el boton para iniciar sesion, comprueba que ambos campos sean correctos para pasar a la ventana meú
+    */
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        if(fldUsuario.getText().equals("root1234")&&psfContrasena.getText().equals("1234")){
+           VentanaMenu home = new VentanaMenu();
+           home.setVisible(true);
+       }
+       else if (fldUsuario.getText().equals("")&&psfContrasena.getText().equals("")){
+           JOptionPane.showMessageDialog(this, "No has introducido las credenciales, introducelas", "Ausencia de datos",JOptionPane.WARNING_MESSAGE);
+       }
+       else if (!fldUsuario.getText().equals("root1234")||!psfContrasena.getText().equals("1234")){
+           JOptionPane.showMessageDialog(this, "O la contraseña o el correo son equivocados, vuelve a intentarlo","Error de login",JOptionPane.ERROR_MESSAGE);
+           fldUsuario.setText("");
+           psfContrasena.setText("");
+       }
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
     /**
+     * El main de VentanaLogin
      * @param args the command line arguments
      */
     public static void main(String args[]) {
